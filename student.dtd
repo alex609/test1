@@ -1,1 +1,5 @@
-<!ELEMENT student EMPTY>
+<!ELEMENT student (#PCDATA)>
+<!ATTLIST student
+	fullname CDTA #REQUIRED
+	group (K6-361|K6-362) #REQUIRED
+>
