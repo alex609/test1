@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:simpleType name="auth">
+          <xs:restriction base="xs:string">      
+          <xs:minLength value="2"/>
+	  <xs:maxLength value="30"/>   
+          </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="cov">
+          <xs:restriction base="xs:string">      
+          <xs:enumeration value="hardback"/>
+          <xs:enumeration value="paperback"/>
+          </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="langu">
+          <xs:restriction base="xs:string">      
+          <xs:length value="2"/>   
+          </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="price">
+          <xs:restriction base="xs:float">      
+          <xs:minInclusive value="0"/>        
+          </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="year">
+          <xs:restriction base="xs:short">      
+          <xs:minInclusive value="1900"/>
+          <xs:maxInclusive value="2014"/>
+          </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="bok">
+            <xs:sequence>
+              <xs:element name="title">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="langu" name="lang" use="required"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="auth" name="author" maxOccurs="unbounded" minOccurs="0"/>
+          
+              <xs:element type="year" name="year"/>
+              <xs:element type="price" name="price"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="category" use="required"/>
+            <xs:attribute type="cov" name="cover" use="optional"/>
+</xs:complexType>
+
+<xs:complexType name="store">
+      <xs:sequence>
+        <xs:element name="book" maxOccurs="unbounded" minOccurs="0" type="bok" />   
+      </xs:sequence>
+</xs:complexType>
+
+  <xs:element name="bookstore" type="store" />
+      
+</xs:schema>
